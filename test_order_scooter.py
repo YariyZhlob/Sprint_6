@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class TestOrderScooter:
-    def test_positive_scenario_one(self, driver):
+    def test_create_order(self, driver):
         driver.get(Constants.URL)
         #Клик по кнопке Заказать сверху справа на странице
         driver.find_element(*YaPageLocators.TOP_ORDER_BUTTON).click()
@@ -46,11 +46,37 @@ class TestOrderScooter:
         driver.find_element(*YaPageLocators.CONFIRMATION_ORDER_BUTTON).click()
         #Клик по кнопке Да
         driver.find_element(*YaPageLocators.YES_BUTTON).click()
-        #Заказ оформлен
+        #Проверка успешного создания заказа
         assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
         #Клик по кнопке посмотреть статус
+        # driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
+        # #Клик по лого Яндекса
+        # driver.find_element(*YaPageLocators.YANDEX_LOGO).click()
+        #
+        # # WebDriverWait(driver, 10).until(EC.number_of_windows_to_be(2))
+        #
+        # driver.switch_to.window(driver.window_handles[1])
+        # WebDriverWait(driver, 10).until(EC.staleness_of(driver.find_element(By.TAG_NAME, 'html')))
+        # # Запоминаем идентификаторы текущих вкладок
+        # # main_window_handle = driver.current_window_handle
+        # # new_window_handle = [handle for handle in driver.window_handles if handle != main_window_handle][0]
+        # #
+        # # # Переключение на новую вкладку
+        # # driver.switch_to.window(new_window_handle)
+        #
+        # WebDriverWait(driver, 10).until(EC.url_contains("dzen.ru"))
+        # time.sleep(5)
+        #
+        # # element = wait.until(EC.presence_of_element_located((By.XPATH, "//form[@role='search']")))
+        # # print(driver.current_url)
+        #
+        # assert "dzen.ru" in driver.current_url
+
+    def test_logo_yandex(self, driver):
+        self.test_create_order(driver)
+        # Клик по кнопке посмотреть статус
         driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
-        #Клик по лого Яндекса
+        # Клик по лого Яндекса
         driver.find_element(*YaPageLocators.YANDEX_LOGO).click()
 
         # WebDriverWait(driver, 10).until(EC.number_of_windows_to_be(2))
@@ -71,14 +97,3 @@ class TestOrderScooter:
         # print(driver.current_url)
 
         assert "dzen.ru" in driver.current_url
-
-
-
-
-
-
-
-
-
-
-
