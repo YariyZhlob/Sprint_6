@@ -18,7 +18,7 @@ class YaPageLocators:
     STATIONS_LIST = (By.XPATH, "//div[@class='select-search__select']")
     #Поле метро Черкизовская
     # CHERKIZOVO_METRO = (By.XPATH, "//div[@class='Order_Text__2broi' and text()='Черкизовская']")
-    CHERKIZOVO_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index="1"]')
+    CHERKIZOVO_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index=""]')
     #Локатор поля Телефон
     FIELD_TELEPHONE = (By.XPATH, '//input[@placeholder="* Телефон: на него позвонит курьер"]')
     #Локатор кнопки Далее
@@ -52,6 +52,16 @@ class YaPageLocators:
     DZEN_NEWS = (By.XPATH, "//form[@role='search']")
     #Лого Самоката
     SCOOTER_LOGO = (By.XPATH, "//img[@alt='Scooter']")
+    #Вторая кнопка Заказать
+    SECOND_ORDER_BUTTON = (By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM']")
+    #Поле метро Академическая
+    AKADEMKA_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index="94"]')
+    #выбор 25 числа
+    DESIRABLE_DATE_TWO = (By.XPATH, "//div[text()='25']")
+    #Выбор срока аренды 3 дня
+    RENTAL_TIME_TWO = (By.XPATH, "//div[@class='Dropdown-option' and text()='трое суток']")
+    #Локатор чекбокса Серая безысходность
+    GRAY_COLOR = (By.XPATH, "//input[@id='grey']")
 
 
 # print(*YaPageLocators.ARRAY_OF_TUPLES[1])
