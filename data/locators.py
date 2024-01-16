@@ -21,5 +21,35 @@ class YaPageLocators:
     CHERKIZOVO_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index="1"]')
     #Локатор поля Телефон
     FIELD_TELEPHONE = (By.XPATH, '//input[@placeholder="* Телефон: на него позвонит курьер"]')
+    #Локатор кнопки Далее
+    ONWARDS_BUTTON = (By.XPATH, "//button[text()='Далее']")
+    #Локатор чекбокса Черный жемчуг
+    BLACK_PEARL = (By.XPATH, "//input[@id='black']")
+    #Кнопка согласия с куками
+    COOKIES_CONFIRMATION = (By.XPATH, '//button[@id="rcc-confirm-button"]')
+    #Поле когда привезти самокат
+    TIME_OF_DELIVERY = (By.XPATH, "//input[@placeholder='* Когда привезти самокат']")
+    #выбор 23 числа
+    DESIRABLE_DATE = (By.XPATH, "//div[text()='23']")
+    #Поле срока аренды
+    RENTAL_FIELD = (By.XPATH, "//div[text()='* Срок аренды']")
+    #Выбор срока аренды 2 дня
+    RENTAL_TIME = (By.XPATH, "//div[@class='Dropdown-option' and text()='двое суток']")
+    #Выбор поля комментариев для курьера
+    COMMENT_FIELD = (By.XPATH,"//input[@placeholder='Комментарий для курьера']")
+    #Кнопка подтверждения заказа
+    CONFIRMATION_ORDER_BUTTON = (By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']")
+    #Кнопка Да
+    YES_BUTTON = (By.XPATH, "//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']")
+    #Заказ оформлен
+    ORDER_IS_CONFIRMED = (By.XPATH, "//div[@class='Order_ModalHeader__3FDaJ']")
+    #Лого Яндекса
+    YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")
+    #Кнопка посмотреть статус
+    LOOK_STATUS_BUTTON = (By.XPATH, "//button[text()='Посмотреть статус']")
+    #Надпись Новости на Дзене
+    # DZEN_NEWS = (By.XPATH, "//div[@data-testid='floor-title-text' and text()='Новости']")
+    DZEN_NEWS = (By.XPATH, "//form[@role='search']")
+
 
 # print(*YaPageLocators.ARRAY_OF_TUPLES[1])
