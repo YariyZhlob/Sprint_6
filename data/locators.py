@@ -50,6 +50,8 @@ class YaPageLocators:
     #Надпись Новости на Дзене
     # DZEN_NEWS = (By.XPATH, "//div[@data-testid='floor-title-text' and text()='Новости']")
     DZEN_NEWS = (By.XPATH, "//form[@role='search']")
+    #Лого Самоката
+    SCOOTER_LOGO = (By.XPATH, "//img[@alt='Scooter']")
 
 
 # print(*YaPageLocators.ARRAY_OF_TUPLES[1])

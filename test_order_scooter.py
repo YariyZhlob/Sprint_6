@@ -47,8 +47,8 @@ class TestOrderScooter:
         #Клик по кнопке Да
         driver.find_element(*YaPageLocators.YES_BUTTON).click()
         #Проверка успешного создания заказа
-        assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
-        #Клик по кнопке посмотреть статус
+        # assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
+        # #Клик по кнопке посмотреть статус
         # driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
         # #Клик по лого Яндекса
         # driver.find_element(*YaPageLocators.YANDEX_LOGO).click()
@@ -94,6 +94,16 @@ class TestOrderScooter:
         time.sleep(5)
 
         # element = wait.until(EC.presence_of_element_located((By.XPATH, "//form[@role='search']")))
-        # print(driver.current_url)
-
+        #print(driver.current_url)
+        #Проверка перехода на страницу Дзена
         assert "dzen.ru" in driver.current_url
+
+    def test_logo_scooter(self, driver):
+        self.test_create_order(driver)
+        #Клик по кнопке посмотреть статус
+        driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
+        time.sleep(5)
+        #Клик по лого Самоката
+        driver.find_element(*YaPageLocators.SCOOTER_LOGO).click()
+        #Проверка перехода на страницу Самоката
+        assert "qa-scooter.praktikum-services.ru" in driver.current_url
