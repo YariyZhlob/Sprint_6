@@ -45,10 +45,11 @@ class TestOrderScooter:
         #Клик по кнопке подтверждения заказа
         driver.find_element(*YaPageLocators.CONFIRMATION_ORDER_BUTTON).click()
         #Клик по кнопке Да
+        # time.sleep(15)
         driver.find_element(*YaPageLocators.YES_BUTTON).click()
         #Проверка успешного создания заказа
-        # assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
-        # #Клик по кнопке посмотреть статус
+        assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
+        #Клик по кнопке посмотреть статус
         # driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
         # #Клик по лого Яндекса
         # driver.find_element(*YaPageLocators.YANDEX_LOGO).click()

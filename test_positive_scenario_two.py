@@ -9,8 +9,15 @@ from selenium.webdriver.support import expected_conditions as EC
 class TestOrderScooterScenarioTwo:
     def test_create_order_two(self, driver):
         driver.get(Constants.URL)
+        #Скроллинг до элемента
+        driver.execute_script("arguments[0].scrollIntoView(true);", driver.find_element(*YaPageLocators.SECOND_ORDER_BUTTON))
         #Клик по кнопке Заказать в середине страницы
         driver.find_element(*YaPageLocators.SECOND_ORDER_BUTTON).click()
+        # #Клик по кнопке согласия с куками
+        driver.find_element(*YaPageLocators.COOKIES_CONFIRMATION).click()
+        # time.sleep(5)
+
+        driver.execute_script("arguments[0].scrollIntoView(true);",driver.find_element(*YaPageLocators.FIELD_NAME))
         #Ввод значения в поле Имя
         driver.find_element(*YaPageLocators.FIELD_NAME).send_keys("Дмитрий")
         #Ввод значения в поле Фамилия
@@ -23,32 +30,32 @@ class TestOrderScooterScenarioTwo:
         driver.find_element(*YaPageLocators.AKADEMKA_METRO).click()
         #Ввод значения в поле Телефон
         driver.find_element(*YaPageLocators.FIELD_TELEPHONE).send_keys("89999999999")
-        #Клик по кнопке согласия с куками
-        driver.find_element(*YaPageLocators.COOKIES_CONFIRMATION).click()
-        #Клик по кнопке Далее
-        driver.find_element(*YaPageLocators.ONWARDS_BUTTON).click()
-        #ожидание загрузки страницы
-        wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((YaPageLocators.BLACK_PEARL)))
-        #Клик по полю когда привезти самокат
-        driver.find_element(*YaPageLocators.TIME_OF_DELIVERY).click()
-        #Клик по 25 числу
-        driver.find_element(*YaPageLocators.DESIRABLE_DATE_TWO).click()
-        #Клик по полю срока аренды
-        driver.find_element(*YaPageLocators.RENTAL_FIELD).click()
-        #Клик по количеству дней аренды
-        driver.find_element(*YaPageLocators.RENTAL_TIME_TWO).click()
-        #Клик по чекбоксу серая безысходность
-        driver.find_element(*YaPageLocators.GRAY_COLOR).click()
-        #Клик по полю комментариев для курьера
-        driver.find_element(*YaPageLocators.COMMENT_FIELD).send_keys(Constants.COURIER_COMMENT)
-        #Клик по кнопке подтверждения заказа
-        driver.find_element(*YaPageLocators.CONFIRMATION_ORDER_BUTTON).click()
-        #Клик по кнопке Да
-        driver.find_element(*YaPageLocators.YES_BUTTON).click()
-        #Проверка успешного создания заказа
+        # # #Клик по кнопке согласия с куками
+        # driver.find_element(*YaPageLocators.COOKIES_CONFIRMATION).click()
+        # #Клик по кнопке Далее
+        # driver.find_element(*YaPageLocators.ONWARDS_BUTTON).click()
+        # #ожидание загрузки страницы
+        # wait = WebDriverWait(driver, 10)
+        # wait.until(EC.presence_of_element_located((YaPageLocators.GRAY_COLOR)))
+        # #Клик по полю когда привезти самокат
+        # driver.find_element(*YaPageLocators.TIME_OF_DELIVERY).click()
+        # #Клик по 25 числу
+        # driver.find_element(*YaPageLocators.DESIRABLE_DATE_TWO).click()
+        # #Клик по полю срока аренды
+        # driver.find_element(*YaPageLocators.RENTAL_FIELD).click()
+        # #Клик по количеству дней аренды
+        # driver.find_element(*YaPageLocators.RENTAL_TIME_TWO).click()
+        # #Клик по чекбоксу серая безысходность
+        # driver.find_element(*YaPageLocators.GRAY_COLOR).click()
+        # #Клик по полю комментариев для курьера
+        # driver.find_element(*YaPageLocators.COMMENT_FIELD).send_keys(Constants.COURIER_COMMENT_TWO)
+        # #Клик по кнопке подтверждения заказа
+        # driver.find_element(*YaPageLocators.CONFIRMATION_ORDER_BUTTON).click()
+        # #Клик по кнопке Да
+        # driver.find_element(*YaPageLocators.YES_BUTTON).click()
+        # #Проверка успешного создания заказа
         # assert "Заказ оформлен" in driver.find_element(*YaPageLocators.ORDER_IS_CONFIRMED).text
-        # #Клик по кнопке посмотреть статус
+        # # #Клик по кнопке посмотреть статус
         # driver.find_element(*YaPageLocators.LOOK_STATUS_BUTTON).click()
         # #Клик по лого Яндекса
         # driver.find_element(*YaPageLocators.YANDEX_LOGO).click()

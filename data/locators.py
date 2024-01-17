@@ -18,7 +18,7 @@ class YaPageLocators:
     STATIONS_LIST = (By.XPATH, "//div[@class='select-search__select']")
     #Поле метро Черкизовская
     # CHERKIZOVO_METRO = (By.XPATH, "//div[@class='Order_Text__2broi' and text()='Черкизовская']")
-    CHERKIZOVO_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index=""]')
+    CHERKIZOVO_METRO = (By.XPATH, '//li[@class="select-search__row" and @data-index="1"]')
     #Локатор поля Телефон
     FIELD_TELEPHONE = (By.XPATH, '//input[@placeholder="* Телефон: на него позвонит курьер"]')
     #Локатор кнопки Далее
