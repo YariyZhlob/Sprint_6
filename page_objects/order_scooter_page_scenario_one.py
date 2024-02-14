@@ -77,7 +77,7 @@ class OrderScooterPage(BasePage):
         # ожидание загрузки страницы
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.presence_of_element_located(LocatorsScenarioOne.BLACK_PEARL))
-        # Клик по полю когда привезти самокат
+        #Клик по полю когда привезти самокат
         self.driver.find_element(*LocatorsScenarioOne.TIME_OF_DELIVERY).click()
         # Клик по 23 числу
         self.driver.find_element(*LocatorsScenarioOne.DESIRABLE_DATE).click()
