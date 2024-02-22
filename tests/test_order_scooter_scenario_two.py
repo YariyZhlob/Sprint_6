@@ -1,8 +1,9 @@
 from selenium.webdriver.common.by import By
-from constants import Constants
+from constants import ConstantUrl
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from page_objects.order_scooter_page_scenario_two import OrderScooterPageScenarioTwo, LocatorsScenarioTwo
+# from page_objects.order_scooter_page_scenario_two import OrderScooterPageScenarioTwo, LocatorsScenarioTwo
+from page_objects.order_scooter_page_scenario_one import OrderScooterPageScenarioTwo, LocatorsScenarioTwo
 from conftest import driver
 import allure
 
@@ -11,7 +12,7 @@ class TestOrderScooterScenarioTwo:
     @allure.title("Заказ с помощью кнопки Заказать сверху справа на странице сценарий два")
     def test_order_scooter_scenario_two(self, driver):
         order_page = OrderScooterPageScenarioTwo(driver)
-        order_page.go_to_site(Constants.URL)
+        order_page.go_to_site(ConstantUrl.URL)
         # Скроллинг до элемента
         driver.execute_script("arguments[0].scrollIntoView(true);",
                               driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
@@ -24,7 +25,7 @@ class TestOrderScooterScenarioTwo:
     @allure.title("Проверка открытия главной страницы Дзена при нажатии на логотип Яндекса сценарий два")
     def test_logo_yandex_scenario_two(self, driver):
         order_page = OrderScooterPageScenarioTwo(driver)
-        order_page.go_to_site(Constants.URL)
+        order_page.go_to_site(ConstantUrl.URL)
         # Скроллинг до элемента
         driver.execute_script("arguments[0].scrollIntoView(true);",
                               driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
@@ -41,7 +42,7 @@ class TestOrderScooterScenarioTwo:
     @allure.title("Проверка попадания на главную страницу при нажатии логотип Самоката сценарий два")
     def test_logo_scooter_scenario_two(self, driver):
         order_page = OrderScooterPageScenarioTwo(driver)
-        order_page.go_to_site(Constants.URL)
+        order_page.go_to_site(ConstantUrl.URL)
         # Скроллинг до элемента
         driver.execute_script("arguments[0].scrollIntoView(true);",
                               driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))

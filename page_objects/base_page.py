@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import allure
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -23,3 +24,9 @@ class BasePage:
     def wait_for_element_visibility_click(self, locator, timeout=10):
         wait = WebDriverWait(self.driver, timeout)
         return wait.until(EC.element_to_be_clickable(locator)).click()
+
+    @allure.step("заполнение поля")
+    def field_filling(self, locator, text):
+        # print("ЭТО передается в BASE_PAGE", method, locator, text)
+        # print(getattr(By, method.upper()), locator, text)
+        return self.driver.find_element(*locator).send_keys(text)
