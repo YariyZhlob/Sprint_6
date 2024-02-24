@@ -27,6 +27,4 @@ class BasePage:
 
     @allure.step("заполнение поля")
     def field_filling(self, locator, text):
-        # print("ЭТО передается в BASE_PAGE", method, locator, text)
-        # print(getattr(By, method.upper()), locator, text)
         return self.driver.find_element(*locator).send_keys(text)

@@ -2,9 +2,10 @@ import allure
 from page_objects.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from constants import ConstantPhrases
+from constants import ConstantPhrases, ConstantUrl, ConstantsScenarioOne
 from locators.locators_scenario_one import LocatorsScenarioOne
 from locators.locators_scenario_two import LocatorsScenarioTwo
+from conftest import driver
 from selenium.webdriver.common.by import By
 
 
@@ -60,21 +61,17 @@ class OrderScooterPage(BasePage):
         # Клик по кнопке Заказать сверху справа на странице
         self.driver.find_element(*LocatorsScenarioOne.TOP_ORDER_BUTTON).click()
         # Ввод значения в поле Имя
-        self.field_filling(LocatorsScenarioOne.FIELD_NAME, name) #("Афанасий")
-        # self.driver.find_element(*LocatorsScenarioOne.FIELD_NAME).send_keys(name) #)("Афанасий")
+        self.field_filling(LocatorsScenarioOne.FIELD_NAME, name)
         # Ввод значения в поле Фамилия
-        self.field_filling(LocatorsScenarioOne.FIELD_SURNAME, surname) #("Никитин")
-        # self.driver.find_element(*LocatorsScenarioOne.FIELD_SURNAME).send_keys(surname)#("Никитин")
+        self.field_filling(LocatorsScenarioOne.FIELD_SURNAME, surname)
         # Ввод значения в поле Адрес
-        self.field_filling(LocatorsScenarioOne.FIELD_ADDRESS, address)  #("Ботаническая, д.8")
-        # self.driver.find_element(*LocatorsScenarioOne.FIELD_ADDRESS).send_keys(address)#("Ботаническая, д.8")
+        self.field_filling(LocatorsScenarioOne.FIELD_ADDRESS, address)
         # Клик по полю Станция метро
         self.driver.find_element(*LocatorsScenarioOne.FIELD_METRO).click()
         # Выбор метро Черкизово
         self.driver.find_element(*LocatorsScenarioOne.CHERKIZOVO_METRO).click()
         # Ввод значения в поле Телефон
-        self.field_filling(LocatorsScenarioOne.FIELD_TELEPHONE, phone) #("88888888888")
-        # self.driver.find_element(*LocatorsScenarioOne.FIELD_TELEPHONE).send_keys(phone) #("88888888888")
+        self.field_filling(LocatorsScenarioOne.FIELD_TELEPHONE, phone)
         # Клик по кнопке согласия с куками
         self.driver.find_element(*LocatorsScenarioOne.COOKIES_CONFIRMATION).click()
         # Клик по кнопке Далее
@@ -98,7 +95,6 @@ class OrderScooterPage(BasePage):
         # Клик по кнопке подтверждения заказа
         self.driver.find_element(*LocatorsScenarioOne.CONFIRMATION_ORDER_BUTTON).click()
         # Клик по кнопке Да
-        # time.sleep(15)
         self.driver.find_element(*LocatorsScenarioOne.YES_BUTTON).click()
 
 
@@ -147,3 +143,57 @@ class OrderScooterPageScenarioTwo(BasePage):
         self.driver.find_element(*LocatorsScenarioTwo.CONFIRMATION_ORDER_BUTTON).click()
         # Клик по кнопке Да
         self.driver.find_element(*LocatorsScenarioTwo.YES_BUTTON).click()
+
+
+class PageFillingData(OrderScooterPage):
+    @allure.step("Fulfill page with data")
+    def page_fulfilling(self, scroll_element=True,
+                        name=ConstantsScenarioOne.NAME, surname=ConstantsScenarioOne.SURNAME,
+                        address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE):
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        if scroll_element:
+            self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                                  self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.order_scooter_scenario_one(name, surname,
+                                        address, phone)
+        return self.wait_for_element_visibility(LocatorsScenarioOne.ORDER_IS_CONFIRMED).text
+
+
+class PageFillingDataLogoYandex(OrderScooterPage):
+    @allure.step("Fulfill page with data Logo Yandex")
+    def page_fulfilling_logo_yandex(self, scroll_element=True,
+                                    name=ConstantsScenarioOne.NAME, surname=ConstantsScenarioOne.SURNAME,
+                                    address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE):
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        if scroll_element:
+            self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                                  self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.order_scooter_scenario_one(name, surname, address, phone)
+        self.wait_for_element_visibility_click(LocatorsScenarioOne.LOOK_STATUS_BUTTON)
+        self.wait_for_element_visibility_click(LocatorsScenarioOne.YANDEX_LOGO)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        WebDriverWait(self.driver, 10).until(EC.staleness_of(self.driver.find_element(By.TAG_NAME, 'html')))
+        WebDriverWait(self.driver, 10).until(EC.url_contains(ConstantUrl.DZEN_URL))
+        return self.driver.current_url
+
+
+class PageFillingDataLogoScooter(OrderScooterPage):
+    @allure.step("Fulfill page with data Logo Scooter")
+    def page_fulfilling_logo_scooter(self, scroll_element=True,
+                                     name=ConstantsScenarioOne.NAME, surname=ConstantsScenarioOne.SURNAME,
+                                     address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE ):
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        if scroll_element:
+            self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                              self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.order_scooter_scenario_one(name, surname, address, phone)
+        self.wait_for_element_visibility_click(LocatorsScenarioOne.LOOK_STATUS_BUTTON)
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO))
+        # Клик по лого Самоката
+        self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO).click()
+        WebDriverWait(self.driver, 10).until(EC.url_contains(ConstantUrl.QA_SCOOTER_URL))
+        return self.driver.current_url
+
+
+
+
