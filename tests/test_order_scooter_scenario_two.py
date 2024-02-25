@@ -1,7 +1,7 @@
-from selenium.webdriver.common.by import By
-from constants import ConstantUrl, ConstantsScenarioTwo
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+# from constants import ConstantUrl, ConstantsScenarioTwo
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 # from page_objects.order_scooter_page_scenario_two import OrderScooterPageScenarioTwo, LocatorsScenarioTwo
 from page_objects.order_scooter_page_scenario_one import PageFillingDataLogoScooterScenarioTwo, PageFillingDataLogoScooter, PageFillingDataScenarioTwo, PageFillingDataLogoYandexScenarioTwo
 from conftest import driver
