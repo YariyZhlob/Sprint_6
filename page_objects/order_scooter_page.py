@@ -69,7 +69,6 @@ class OrderScooterPageScenarioTwo(BasePage):
         # Ввод значения в поле Телефон
         self.field_filling(LocatorsScenarioTwo.FIELD_TELEPHONE, phone)
         # # Клик по кнопке согласия с куками
-        # self.driver.find_element(*LocatorsScenarioTwo.COOKIES_CONFIRMATION).click()
         # Клик по кнопке Далее
         self.driver.find_element(*LocatorsScenarioTwo.ONWARDS_BUTTON).click()
         # ожидание загрузки страницы
@@ -87,7 +86,6 @@ class OrderScooterPageScenarioTwo(BasePage):
         self.driver.find_element(*LocatorsScenarioTwo.GRAY_COLOR).click()
         # Клик по полю комментариев для курьера
         self.field_filling(LocatorsScenarioTwo.COMMENT_FIELD, ConstantPhrases.COURIER_COMMENT_TWO)
-        # self.driver.find_element(*LocatorsScenarioTwo.COMMENT_FIELD).send_keys(ConstantPhrases.COURIER_COMMENT_TWO)
         # Клик по кнопке подтверждения заказа
         self.driver.find_element(*LocatorsScenarioTwo.CONFIRMATION_ORDER_BUTTON).click()
         # Клик по кнопке Да
@@ -168,20 +166,7 @@ class PageFillingDataLogoYandexScenarioTwo(OrderScooterPageScenarioTwo):
 
 class PageFillingDataLogoScooterScenarioTwo(OrderScooterPageScenarioTwo):
     @allure.step("Fulfill page with data Logo Scooter Scenario Two")
-    def page_fulfilling_logo_scooter(self, scroll_element=True,
-                                     name=ConstantsScenarioTwo.NAME, surname=ConstantsScenarioOne.SURNAME,
-                                     address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE):
-        # self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
-        # if scroll_element:
-        #     self.driver.execute_script("arguments[0].scrollIntoView(true);",
-        #                       self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
-        # self.order_scooter_scenario_one(name, surname, address, phone)
-        # self.wait_for_element_visibility_click(LocatorsScenarioOne.LOOK_STATUS_BUTTON)
-        # self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO))
-        # # Клик по лого Самоката
-        # self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO).click()
-        # WebDriverWait(self.driver, 10).until(EC.url_contains(ConstantUrl.QA_SCOOTER_URL))
-
+    def page_fulfilling_logo_scooter(self):
         self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
         # Скроллинг до элемента
         self.driver.execute_script("arguments[0].scrollIntoView(true);",
