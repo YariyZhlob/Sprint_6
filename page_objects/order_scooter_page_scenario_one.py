@@ -2,7 +2,7 @@ import allure
 from page_objects.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from constants import ConstantPhrases, ConstantUrl, ConstantsScenarioOne
+from constants import ConstantPhrases, ConstantUrl, ConstantsScenarioOne, ConstantsScenarioTwo
 from locators.locators_scenario_one import LocatorsScenarioOne
 from locators.locators_scenario_two import LocatorsScenarioTwo
 from conftest import driver
@@ -52,7 +52,6 @@ from selenium.webdriver.common.by import By
 #     YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")
 #     # Лого Самоката
 #     SCOOTER_LOGO = (By.XPATH, "//img[@alt='Scooter']")
-
 
 
 class OrderScooterPage(BasePage):
@@ -154,8 +153,7 @@ class PageFillingData(OrderScooterPage):
         if scroll_element:
             self.driver.execute_script("arguments[0].scrollIntoView(true);",
                                   self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
-        self.order_scooter_scenario_one(name, surname,
-                                        address, phone)
+        self.order_scooter_scenario_one(name, surname, address, phone)
         return self.wait_for_element_visibility(LocatorsScenarioOne.ORDER_IS_CONFIRMED).text
 
 
@@ -181,7 +179,7 @@ class PageFillingDataLogoScooter(OrderScooterPage):
     @allure.step("Fulfill page with data Logo Scooter")
     def page_fulfilling_logo_scooter(self, scroll_element=True,
                                      name=ConstantsScenarioOne.NAME, surname=ConstantsScenarioOne.SURNAME,
-                                     address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE ):
+                                     address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE):
         self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
         if scroll_element:
             self.driver.execute_script("arguments[0].scrollIntoView(true);",
@@ -195,5 +193,62 @@ class PageFillingDataLogoScooter(OrderScooterPage):
         return self.driver.current_url
 
 
+class PageFillingDataScenarioTwo(OrderScooterPageScenarioTwo):
+    @allure.step("Fulfill page with data Scenario Two")
+    def page_fulfilling(self, scroll_element=True,
+                        name=ConstantsScenarioTwo.NAME, surname=ConstantsScenarioTwo.SURNAME,
+                        address=ConstantsScenarioTwo.ADDRESS, phone=ConstantsScenarioTwo.PHONE):
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        # Скроллинг до элемента
+        self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                              self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.COOKIES_CONFIRMATION)
+        self.order_scooter_scenario_two(name, surname, address, phone)
+        return self.wait_for_element_visibility(LocatorsScenarioTwo.ORDER_IS_CONFIRMED).text
 
 
+class PageFillingDataLogoYandexScenarioTwo(OrderScooterPageScenarioTwo):
+    @allure.step("Fulfill page with data Logo Yandex Scenario Two")
+    def page_fulfilling_logo_yandex(self, name=ConstantsScenarioTwo.NAME, surname=ConstantsScenarioTwo.SURNAME,
+                        address=ConstantsScenarioTwo.ADDRESS, phone=ConstantsScenarioTwo.PHONE):
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        # Скроллинг до элемента
+        self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                              self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.COOKIES_CONFIRMATION)
+        self.order_scooter_scenario_two(name, surname, address, phone)
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.LOOK_STATUS_BUTTON)
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.YANDEX_LOGO)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        WebDriverWait(self.driver, 10).until(EC.staleness_of(self.driver.find_element(By.TAG_NAME, 'html')))
+        WebDriverWait(self.driver, 10).until(EC.url_contains('https://dzen.ru/'))
+        return self.driver.current_url
+
+
+class PageFillingDataLogoScooterScenarioTwo(OrderScooterPageScenarioTwo):
+    @allure.step("Fulfill page with data Logo Scooter Scenario Two")
+    def page_fulfilling_logo_scooter(self, scroll_element=True,
+                                     name=ConstantsScenarioTwo.NAME, surname=ConstantsScenarioOne.SURNAME,
+                                     address=ConstantsScenarioOne.ADDRESS, phone=ConstantsScenarioOne.PHONE):
+        # self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        # if scroll_element:
+        #     self.driver.execute_script("arguments[0].scrollIntoView(true);",
+        #                       self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        # self.order_scooter_scenario_one(name, surname, address, phone)
+        # self.wait_for_element_visibility_click(LocatorsScenarioOne.LOOK_STATUS_BUTTON)
+        # self.driver.execute_script("arguments[0].scrollIntoView(true);", self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO))
+        # # Клик по лого Самоката
+        # self.driver.find_element(*LocatorsScenarioOne.SCOOTER_LOGO).click()
+        # WebDriverWait(self.driver, 10).until(EC.url_contains(ConstantUrl.QA_SCOOTER_URL))
+
+        self.go_to_site(ConstantUrl.QA_SCOOTER_URL)
+        # Скроллинг до элемента
+        self.driver.execute_script("arguments[0].scrollIntoView(true);",
+                              self.driver.find_element(*LocatorsScenarioTwo.SECOND_ORDER_BUTTON))
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.COOKIES_CONFIRMATION)
+        self.order_scooter_scenario_two(name="Дмитрий", surname="Менделеев",
+                                      address="Пр. Химиков, д.10", phone="89999999999")
+        self.wait_for_element_visibility_click(LocatorsScenarioTwo.LOOK_STATUS_BUTTON)
+        # Клик по лого Самоката
+        self.driver.find_element(*LocatorsScenarioTwo.SCOOTER_LOGO).click()
+        return self.driver.current_url

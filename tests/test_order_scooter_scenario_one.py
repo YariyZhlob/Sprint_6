@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from constants import ConstantUrl
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from page_objects.order_scooter_page_scenario_one import OrderScooterPage, LocatorsScenarioOne, PageFillingData, PageFillingDataLogoYandex, PageFillingDataLogoScooter
+from page_objects.order_scooter_page_scenario_one import OrderScooterPage, LocatorsScenarioOne, PageFillingData, PageFillingDataLogoYandex, PageFillingDataLogoScooter, PageFillingDataScenarioTwo
 from conftest import driver
 import allure
 
